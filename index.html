@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasso & Scalzer — Consultoria Contábil para Construção e Imobiliário</title>
+<meta name="description" content="Gestão contábil inteligente para quem constrói o futuro. Contabilidade, consultoria, auditoria e BPO financeiro para incorporadoras, construtoras e loteamentos. Vila Velha/ES.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f; --bg2:#0c1019; --ink:#e9ecf2; --mute:#8d95a6; --line:rgba(255,255,255,.08);
+  --gold:#d4a853; --gold2:#f2cf7a; --teal:#2fd5c1;
+  --card:rgba(255,255,255,.035);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;cursor:none}
+@media (hover:none){body{cursor:auto}}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:var(--gold2)}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+section{position:relative;padding:120px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+h2{font-size:clamp(32px,4.4vw,56px);max-width:16ch}
+.lead{color:var(--mute);font-size:18px;max-width:58ch;margin-top:18px}
+
+/* cursor */
+#cur{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .25s,height .25s,background .25s}
+#ring{position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(212,168,83,.6);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),border-color .3s}
+body.hovering #cur{width:4px;height:4px}
+body.hovering #ring{width:64px;height:64px;border-color:var(--teal)}
+@media (hover:none){#cur,#ring{display:none}}
+
+/* glow following mouse */
+#glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(212,168,83,.07),transparent 60%)}
+
+/* progress */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:1000}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:22px 0;transition:all .4s var(--ease)}
+nav.scrolled{padding:12px 0;background:rgba(7,9,15,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em;font-size:17px}
+.logo .mark{width:36px;height:36px;position:relative}
+.logo small{display:block;font-weight:500;font-size:10px;letter-spacing:.28em;color:var(--mute);text-transform:uppercase}
+.menu{display:flex;gap:34px;font-size:14px;font-weight:500;color:var(--mute)}
+.menu a{position:relative;transition:color .3s}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
+.menu a:hover{color:var(--ink)}.menu a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .3s var(--ease),border-color .3s,color .3s;will-change:transform}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#b88a36);color:#120d02;border-color:transparent}
+.btn.gold::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--gold2),var(--gold));opacity:0;transition:opacity .3s}
+.btn.gold:hover::before{opacity:1}
+.btn span{position:relative;z-index:1}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold2)}
+.btn svg{position:relative;z-index:1;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.burger{display:none;width:40px;height:40px;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink);cursor:none}
+@media(max-width:900px){.menu,.nav-cta{display:none}.burger{display:grid;place-items:center}}
+.mobile{position:fixed;inset:0;background:rgba(7,9,15,.96);z-index:950;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;font-size:26px;font-weight:600;transform:translateY(-100%);transition:transform .5s var(--ease)}
+.mobile.open{transform:none}
+.mobile .x{position:absolute;top:24px;right:24px;font-size:14px;color:var(--mute);letter-spacing:.2em}
+
+/* hero */
+#hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 100px;overflow:hidden}
+#three{position:fixed;inset:0;z-index:0;pointer-events:none}
+#hero,.marquee,#servicos{background:transparent}
+#servicos .card{background:rgba(12,16,25,.72);backdrop-filter:blur(10px)}
+#three canvas{display:block;width:100%;height:100%}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+h1{font-size:clamp(44px,6.4vw,88px);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+h1 .line{display:block;overflow:hidden}
+h1 .line span{display:inline-block;transform:translateY(110%);animation:rise 1.1s var(--ease) forwards}
+h1 .line:nth-child(2) span{animation-delay:.12s}h1 .line:nth-child(3) span{animation-delay:.24s}
+@keyframes rise{to{transform:none}}
+.hero p{margin-top:26px;font-size:18px;color:var(--mute);max-width:52ch;opacity:0;animation:fade 1s .5s forwards}
+.hero .cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+.hero-side{position:relative}
+.panel{position:relative;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));backdrop-filter:blur(14px);transform-style:preserve-3d;transition:transform .15s linear;opacity:0;animation:fade 1s .9s forwards}
+.panel .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.panel .v{font-size:40px;font-weight:700;margin-top:4px;letter-spacing:-.03em}
+.panel .row{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
+.panel .row .v{font-size:26px}
+.panel .chip{position:absolute;top:-18px;right:22px;background:var(--teal);color:#032623;font-size:11px;font-weight:800;letter-spacing:.14em;padding:8px 14px;border-radius:999px;transform:translateZ(40px)}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint i{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);display:block;animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;background:var(--bg2);position:relative;z-index:2}
+.marquee .track{display:flex;gap:60px;white-space:nowrap;animation:scroll 32s linear infinite;width:max-content}
+.marquee span{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:60px}
+.marquee span::after{content:"◆";color:var(--gold);font-size:8px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* services */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+@media(max-width:980px){.grid3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.grid3{grid-template-columns:1fr}}
+.card{position:relative;padding:32px 28px;border-radius:20px;border:1px solid var(--line);background:var(--card);transform-style:preserve-3d;transition:transform .2s ease-out,border-color .3s;min-height:250px;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--x,50%) var(--y,50%),rgba(212,168,83,.14),transparent 45%);opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:1}.card:hover{border-color:rgba(212,168,83,.35)}
+.card .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,rgba(212,168,83,.22),rgba(47,213,193,.12));color:var(--gold2);transform:translateZ(30px);margin-bottom:22px}
+.card h3{font-size:20px;transform:translateZ(22px)}
+.card p{color:var(--mute);font-size:15px;margin-top:10px;transform:translateZ(14px)}
+.card .num{position:absolute;top:22px;right:24px;font-family:'Instrument Serif',serif;font-size:40px;color:rgba(255,255,255,.07);transform:translateZ(8px)}
+
+/* segments */
+#segmentos{background:var(--bg2)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:900px){.seg{grid-template-columns:1fr}}
+.seg-list{display:flex;flex-direction:column;gap:12px;margin-top:40px}
+.seg-item{display:flex;gap:22px;align-items:center;padding:24px 26px;border-radius:16px;border:1px solid var(--line);background:var(--card);transition:transform .4s var(--ease),border-color .3s,background .3s;cursor:none}
+.seg-item:hover{transform:translateX(12px);border-color:rgba(47,213,193,.4);background:rgba(47,213,193,.04)}
+.seg-item b{display:block;font-size:19px;font-weight:600}
+.seg-item small{color:var(--mute);font-size:14px}
+.seg-item .n{font-family:'Instrument Serif',serif;font-size:30px;color:var(--gold);min-width:40px}
+#three2{position:relative;height:460px;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(circle at 50% 60%,rgba(212,168,83,.08),transparent 60%)}
+#three2 canvas{display:block}
+#three2 .tag{position:absolute;left:20px;bottom:20px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:70px;padding-top:50px;border-top:1px solid var(--line)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat b{font-size:clamp(38px,5vw,62px);font-weight:700;letter-spacing:-.04em;display:block;background:linear-gradient(90deg,var(--ink),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{color:var(--mute);font-size:14px}
+
+/* about */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+@media(max-width:900px){.about{grid-template-columns:1fr}}
+.quote{font-family:'Instrument Serif',serif;font-size:clamp(26px,3vw,38px);line-height:1.25;color:var(--ink);font-style:italic}
+.quote em{color:var(--gold2)}
+.pill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.pill{padding:10px 16px;border-radius:999px;border:1px solid var(--line);font-size:13px;color:var(--mute);transition:all .3s}
+.pill:hover{border-color:var(--gold);color:var(--gold2);transform:translateY(-2px)}
+
+/* diagnostic */
+#diagnostico{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.diag{border:1px solid var(--line);border-radius:26px;padding:46px;background:var(--card);position:relative;overflow:hidden}
+.diag::after{content:"";position:absolute;width:520px;height:520px;right:-200px;top:-200px;border-radius:50%;background:radial-gradient(circle,rgba(47,213,193,.12),transparent 60%);pointer-events:none}
+.steps{display:flex;gap:8px;margin:26px 0 30px}
+.steps i{flex:1;height:3px;border-radius:2px;background:var(--line);transition:background .4s}
+.steps i.on{background:var(--gold)}
+.q{font-size:clamp(22px,2.6vw,30px);font-weight:600;min-height:70px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.opt{padding:18px 20px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);text-align:left;color:var(--ink);font:inherit;font-weight:500;cursor:none;transition:all .3s var(--ease)}
+.opt:hover{border-color:var(--gold);transform:translateY(-3px);background:rgba(212,168,83,.06)}
+.result{display:none}
+.result.show{display:block;animation:fade .6s forwards}
+.result h3{font-size:28px;margin-bottom:10px}
+.result p{color:var(--mute);max-width:60ch}
+
+/* cursos */
+.cursos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:50px}
+.curso{padding:26px;border-radius:18px;border:1px solid var(--line);background:var(--card);transition:all .4s var(--ease);position:relative}
+.curso:hover{transform:translateY(-6px);border-color:rgba(212,168,83,.4)}
+.curso .t{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.curso h3{font-size:19px;margin-top:10px}
+.curso p{color:var(--mute);font-size:14px;margin-top:8px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+@media(max-width:900px){.contact{grid-template-columns:1fr}}
+.info{display:flex;flex-direction:column;gap:18px;margin-top:34px}
+.info a,.info div{display:flex;gap:16px;align-items:flex-start;color:var(--ink);font-size:16px}
+.info svg{flex:none;color:var(--gold);margin-top:3px}
+.info small{display:block;color:var(--mute);font-size:13px}
+form{display:grid;gap:14px;padding:36px;border-radius:24px;border:1px solid var(--line);background:var(--card)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.f2{grid-template-columns:1fr}}
+label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600;display:grid;gap:8px}
+input,select,textarea{width:100%;padding:15px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--ink);font:inherit;font-size:15px;transition:border-color .3s,box-shadow .3s;cursor:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,168,83,.12)}
+select option{background:#0c1019}
+textarea{min-height:120px;resize:vertical}
+.sent{display:none;padding:18px;border-radius:12px;background:rgba(47,213,193,.1);border:1px solid rgba(47,213,193,.35);color:var(--teal);font-weight:600}
+.socials{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.socials a{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;color:var(--mute);transition:all .3s var(--ease)}
+.socials a:hover{color:var(--gold2);border-color:var(--gold);transform:translateY(-4px) rotate(-6deg)}
+
+footer{border-top:1px solid var(--line);padding:50px 0 30px;font-size:13px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+
+/* whatsapp float */
+.wa{position:fixed;right:26px;bottom:26px;z-index:800;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;color:#fff;box-shadow:0 10px 30px rgba(37,211,102,.35);transition:transform .3s var(--ease)}
+.wa:hover{transform:scale(1.08) rotate(8deg)}
+.wa::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(37,211,102,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.4);opacity:0}}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="ring"></div><div id="glow"></div><div id="prog"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#hero" class="logo">
+      <svg class="mark" viewBox="0 0 36 36" fill="none"><path d="M4 30 L18 4 L32 30" stroke="#d4a853" stroke-width="2.4" stroke-linejoin="round"/><path d="M10 30 L18 15 L26 30" stroke="#2fd5c1" stroke-width="2.4" stroke-linejoin="round"/><circle cx="18" cy="30" r="2.6" fill="#f2cf7a"/></svg>
+      <div>Tasso <span style="color:var(--gold)">&amp;</span> Scalzer<small>Consultoria</small></div>
+    </a>
+    <div class="menu">
+      <a href="#servicos">Serviços</a><a href="#segmentos">Segmentos</a><a href="#sobre">Sobre</a><a href="#diagnostico">Diagnóstico</a><a href="#cursos">Cursos</a><a href="#contato">Contato</a>
+    </div>
+    <a class="btn ghost nav-cta" href="https://painel.tassoconsultoria.com.br" target="_blank" rel="noopener"><span>Área do cliente</span></a>
+    <button class="burger" id="burger" aria-label="Menu"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 1h18M0 6h18M0 11h18"/></svg></button>
+  </div>
+</nav>
+<div class="mobile" id="mobile">
+  <span class="x" id="closeM">FECHAR ✕</span>
+  <a href="#servicos">Serviços</a><a href="#segmentos">Segmentos</a><a href="#sobre">Sobre</a><a href="#diagnostico">Diagnóstico</a><a href="#cursos">Cursos</a><a href="#contato">Contato</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="three"></div>
+  <div class="wrap hero-grid">
+    <div class="hero">
+      <div class="eyebrow">Contabilidade · Consultoria · Auditoria</div>
+      <h1>
+        <span class="line"><span>Gestão contábil</span></span>
+        <span class="line"><span>inteligente para quem</span></span>
+        <span class="line"><span><span class="serif">constrói</span> o futuro.</span></span>
+      </h1>
+      <p>Especialistas em incorporadoras, construtoras e loteamentos. Transformamos números em decisões estratégicas para o seu empreendimento — do RET ao balanço, da governança à auditoria.</p>
+      <div class="cta">
+        <a class="btn gold magnetic" href="#contato"><span>Solicitar orçamento</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn ghost magnetic" href="#servicos"><span>Conheça os serviços</span></a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="panel tilt" id="panel">
+        <span class="chip">DESDE 2001</span>
+        <div class="k">Anos de experiência</div>
+        <div class="v"><span class="count" data-to="25">0</span>+</div>
+        <div class="row">
+          <div><div class="k">Foco</div><div class="v" style="font-size:18px;margin-top:8px">Setor imobiliário &amp; construção civil</div></div>
+          <div><div class="k">Sede</div><div class="v" style="font-size:18px;margin-top:8px">Praia da Costa, Vila Velha/ES</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Role<i></i></div>
+</section>
+
+<div class="marquee"><div class="track" id="track">
+  <span>Implantação de Governança</span><span>Auditoria</span><span>BPO Financeiro</span><span>Due Diligence</span><span>Impairment</span><span>Avaliação de Ativos</span><span>Consultoria Contábil</span><span>Virtual Office</span><span>Mentoria para Empresas</span>
+</div></div>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">O que fazemos</div>
+    <h2>Soluções completas para empresas que <span class="serif">constroem</span>.</h2>
+    <p class="lead">Da estruturação societária à auditoria independente, entregamos uma visão integrada: contábil, financeira e tributária.</p></div>
+    <div class="grid3">
+      <div class="card tilt rv"><span class="num">01</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div><h3>Contabilidade Imobiliária</h3><p>Contabilidade especializada para incorporadoras, construtoras e loteamentos, com domínio de RET, SPE, SCP e patrimônio de afetação.</p></div>
+      <div class="card tilt rv"><span class="num">02</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5M8 11h6M11 8v6"/></svg></div><h3>Auditoria</h3><p>Auditoria contábil, financeira e tributária que dá segurança a sócios, investidores e instituições financeiras.</p></div>
+      <div class="card tilt rv"><span class="num">03</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 15l5-5 4 4 7-7M16 7h4v4"/></svg></div><h3>BPO Financeiro</h3><p>Terceirização completa do financeiro: contas a pagar e receber, conciliação, fluxo de caixa e relatórios gerenciais.</p></div>
+      <div class="card tilt rv"><span class="num">04</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Implantação de Governança</h3><p>Estruturas de controle, compliance e processos que preparam a empresa para crescer, captar e suceder.</p></div>
+      <div class="card tilt rv"><span class="num">05</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></div><h3>Due Diligence</h3><p>Diligência contábil, fiscal e trabalhista para fusões, aquisições, entrada de investidores e compra de terrenos.</p></div>
+      <div class="card tilt rv"><span class="num">06</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>Avaliação de Ativos &amp; Impairment</h3><p>Laudos de avaliação e testes de recuperabilidade alinhados às normas CPC/IFRS.</p></div>
+      <div class="card tilt rv"><span class="num">07</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 21h8M12 17v4M3 4h18v13H3z"/><path d="M7 13l3-3 2 2 4-4"/></svg></div><h3>Consultoria Contábil</h3><p>Planejamento tributário, reorganização societária e apoio à decisão com base em dados confiáveis.</p></div>
+      <div class="card tilt rv"><span class="num">08</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg></div><h3>Mentoria para Empresas</h3><p>Acompanhamento próximo de gestores e sócios para profissionalizar a gestão e acelerar resultados.</p></div>
+      <div class="card tilt rv"><span class="num">09</span><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 22h8"/></svg></div><h3>Virtual Office</h3><p>Endereço comercial, recepção e estrutura para sua empresa operar com presença profissional em Vila Velha.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTOS -->
+<section id="segmentos">
+  <div class="wrap seg">
+    <div class="rv">
+      <div class="eyebrow">Para quem</div>
+      <h2>Feito sob medida para o <span class="serif">mercado imobiliário</span>.</h2>
+      <p class="lead">Cada empreendimento tem um ciclo próprio. Nossa contabilidade acompanha cada etapa — da compra do terreno à entrega das chaves.</p>
+      <div class="seg-list">
+        <div class="seg-item"><span class="n">I</span><div><b>Incorporadoras</b><small>RET, patrimônio de afetação, reconhecimento de receita por POC e estruturação de SPEs.</small></div></div>
+        <div class="seg-item"><span class="n">II</span><div><b>Construtoras</b><small>Custo por obra, contratos de empreitada, retenções, INSS sobre obras e CNO.</small></div></div>
+        <div class="seg-item"><span class="n">III</span><div><b>Loteamentos</b><small>Apuração por lote vendido, permutas, tributação de ganhos e controles de longo prazo.</small></div></div>
+      </div>
+      <div class="stats">
+        <div class="stat rv"><b><span class="count" data-to="25">0</span>+</b><span>anos de mercado</span></div>
+        <div class="stat rv"><b><span class="count" data-to="9">0</span></b><span>linhas de serviço</span></div>
+        <div class="stat rv"><b><span class="count" data-to="3">0</span></b><span>segmentos atendidos</span></div>
+        <div class="stat rv"><b><span class="count" data-to="7">0</span></b><span>empresas parceiras</span></div>
+      </div>
+    </div>
+    <div id="three2" class="rv"><span class="tag">Estrutura · Transparência · Resultado</span></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="wrap about">
+    <div class="rv">
+      <div class="eyebrow">Sobre a Tasso &amp; Scalzer</div>
+      <h2>Experiência que vira <span class="serif">vantagem</span>.</h2>
+    </div>
+    <div class="rv">
+      <p class="quote">"Somos uma consultoria <em>moderna e dinâmica</em>. A experiência da nossa equipe é a nossa principal força — e o objetivo é um só: maximizar as chances de sucesso dos nossos clientes."</p>
+      <p class="lead" style="margin-top:28px">Fundada em 2001 em Vila Velha/ES, a Tasso &amp; Scalzer reúne contadores, auditores e consultores com atuação dedicada ao setor da construção civil. Atuamos como parceiros estratégicos: entendemos a obra, o fluxo de caixa e o regime tributário antes de propor qualquer solução.</p>
+      <div class="pill-list">
+        <span class="pill">Normas CPC / IFRS</span><span class="pill">RET &amp; Patrimônio de Afetação</span><span class="pill">SPE · SCP</span><span class="pill">eSocial</span><span class="pill">Planejamento tributário</span><span class="pill">Mentoria executiva</span><span class="pill">Podcast Tasso Conta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section id="diagnostico">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Diagnóstico rápido</div>
+    <h2>Em 3 respostas, descubra o <span class="serif">próximo passo</span> da sua empresa.</h2></div>
+    <div class="diag rv" style="margin-top:46px">
+      <div class="steps"><i class="on"></i><i></i><i></i></div>
+      <div id="quiz">
+        <div class="q" id="qtext"></div>
+        <div class="opts" id="opts"></div>
+      </div>
+      <div class="result" id="result">
+        <div class="eyebrow">Recomendação</div>
+        <h3 id="rtitle"></h3>
+        <p id="rtext"></p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+          <a class="btn gold" id="rwa" href="#" target="_blank" rel="noopener"><span>Falar com um especialista</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <button class="btn ghost opt" id="restart" style="padding:14px 26px"><span>Refazer</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Conhecimento</div>
+    <h2>Cursos, webinars e <span class="serif">conteúdo</span> para quem decide.</h2>
+    <p class="lead">Além de atender, ensinamos. Nossa equipe forma gestores e profissionais contábeis nos temas mais sensíveis do setor.</p></div>
+    <div class="cursos">
+      <div class="curso rv"><span class="t">Webinar</span><h3>Plano de Contas adequado às Novas Normas Contábeis</h3><p>Estruture o plano de contas da sua empresa em conformidade com os CPCs.</p></div>
+      <div class="curso rv"><span class="t">Webinar</span><h3>SPE | SCP</h3><p>Como estruturar sociedades de propósito específico e em conta de participação em empreendimentos.</p></div>
+      <div class="curso rv"><span class="t">Webinar</span><h3>RET — Regime Especial de Tributação</h3><p>Requisitos, vantagens e armadilhas do RET para incorporações imobiliárias.</p></div>
+      <div class="curso rv"><span class="t">Webinar</span><h3>eSocial — Módulos I e II</h3><p>Obrigações trabalhistas e previdenciárias no eSocial, com foco em obras.</p></div>
+      <div class="curso rv"><span class="t">Podcast</span><h3>Tasso Conta</h3><p>Conversas sobre contabilidade, negócios e mercado imobiliário no YouTube.</p></div>
+      <div class="curso rv"><span class="t">Série</span><h3>Tasso Conecta</h3><p>Dicas financeiras com Carla Tasso para empreendedores e gestores.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="wrap contact">
+    <div class="rv">
+      <div class="eyebrow">Fale conosco</div>
+      <h2>Vamos construir <span class="serif">juntos</span>?</h2>
+      <p class="lead">Solicite um orçamento ou agende uma conversa com nossa equipe.</p>
+      <div class="info">
+        <a href="https://wa.me/5527992424004" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a9 9 0 01-13.4 7.8L3 21l1.3-4.4A9 9 0 1121 12z"/></svg><div>(27) 9 9242-4004<small>WhatsApp</small></div></a>
+        <a href="tel:+552733115373"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><div>(27) 3311-5373<small>Telefone</small></div></a>
+        <a href="mailto:assistente@tassoconsultoria.com.br"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div>assistente@tassoconsultoria.com.br<small>E-mail</small></div></a>
+        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><div>Rua José Penna Medina, 195 — Sala 903<small>Praia da Costa · Vila Velha/ES</small></div></div>
+      </div>
+      <div class="socials">
+        <a href="https://instagram.com/tasso.scalzer" target="_blank" rel="noopener" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.linkedin.com/company/tasso-scalzer" target="_blank" rel="noopener" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 8.5h-3v12h3zM5 3.5A1.75 1.75 0 105 7a1.75 1.75 0 000-3.5zM20.5 13.2c0-3.3-1.8-4.9-4.2-4.9a3.6 3.6 0 00-3.3 1.8V8.5h-3v12h3v-6.3c0-1.7.7-2.7 2.1-2.7s2 1 2 2.7v6.3h3.4z"/></svg></a>
+        <a href="https://www.youtube.com/@tasso.scalzer" target="_blank" rel="noopener" title="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2.5 12c0-3 .3-4.6 1-5.3.8-.8 2.4-1 8.5-1s7.7.2 8.5 1c.7.7 1 2.3 1 5.3s-.3 4.6-1 5.3c-.8.8-2.4 1-8.5 1s-7.7-.2-8.5-1c-.7-.7-1-2.3-1-5.3z"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/Tassoconsultoria" target="_blank" rel="noopener" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.2c0-.9.3-1.5 1.5-1.5h1.5V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V11H8v3h2.6v7z"/></svg></a>
+        <a href="https://www.tiktok.com/@tasso.scalzer" target="_blank" rel="noopener" title="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.2 1.6 3.6 3.9 3.8v3c-1.5 0-2.8-.5-3.9-1.3v6.2a5.6 5.6 0 11-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 102 2.5V3z"/></svg></a>
+        <a href="https://t.me/Tassoaccoutingbusiness" target="_blank" rel="noopener" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 4.5L2.8 11.6c-1 .4-1 1 0 1.3l4.6 1.5 1.8 5.4c.2.6.4.8.8.8.3 0 .5-.2.8-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.8-1.6-1.4zM8.9 14.2l9.4-5.9c.4-.3.8 0 .5.3l-7.8 7-.3 3.2z"/></svg></a>
+      </div>
+    </div>
+    <form id="form" class="rv">
+      <div class="f2">
+        <label>Nome<input name="nome" required placeholder="Seu nome"></label>
+        <label>Empresa<input name="empresa" placeholder="Nome da empresa"></label>
+      </div>
+      <div class="f2">
+        <label>E-mail<input type="email" name="email" required placeholder="voce@empresa.com.br"></label>
+        <label>WhatsApp<input name="fone" placeholder="(27) 9 0000-0000"></label>
+      </div>
+      <label>Segmento<select name="seg"><option>Incorporadora</option><option>Construtora</option><option>Loteamento</option><option>Outro</option></select></label>
+      <label>Como podemos ajudar?<textarea name="msg" placeholder="Conte brevemente sobre a sua empresa e o que você precisa."></textarea></label>
+      <button class="btn gold" type="submit" style="justify-content:center"><span>Enviar pelo WhatsApp</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <div class="sent" id="sent">Mensagem preparada! Se o WhatsApp não abriu, clique no botão verde no canto da tela.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr"></span> Tasso &amp; Scalzer — Consultoria · Vila Velha/ES</div>
+    <div style="display:flex;gap:22px"><a href="https://painel.tassoconsultoria.com.br" target="_blank" rel="noopener">Área do cliente</a><a href="https://linktr.ee/tasso.scalzer" target="_blank" rel="noopener">Linktree</a><a href="#hero">Voltar ao topo ↑</a></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/5527992424004?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9 1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- cursor + glow ---------- */
+const cur=document.getElementById('cur'),ring=document.getElementById('ring'),glow=document.getElementById('glow');
+let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;glow.style.setProperty('--mx',mx+'px');glow.style.setProperty('--my',my+'px')});
+(function loopRing(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(loopRing)})();
+document.querySelectorAll('a,button,.opt,.seg-item,input,select,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'))});
+
+/* ---------- nav / progress ---------- */
+const nav=document.getElementById('nav'),prog=document.getElementById('prog');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>40);const h=document.documentElement;prog.style.width=(scrollY/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+const mob=document.getElementById('mobile');
+document.getElementById('burger').onclick=()=>mob.classList.add('open');
+document.getElementById('closeM').onclick=()=>mob.classList.remove('open');
+mob.querySelectorAll('a').forEach(a=>a.onclick=()=>mob.classList.remove('open'));
+document.getElementById('yr').textContent=new Date().getFullYear();
+document.getElementById('track').innerHTML+=document.getElementById('track').innerHTML;
+
+/* ---------- reveal ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)});
+
+/* ---------- counters ---------- */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,to=+el.dataset.to,t0=performance.now();(function tick(t){const p=Math.min(1,(t-t0)/1600),ease=1-Math.pow(1-p,3);el.textContent=Math.round(to*ease);if(p<1)requestAnimationFrame(tick)})(t0);cio.unobserve(el)}),{threshold:.5});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+/* ---------- 3D tilt cards ---------- */
+if(matchMedia('(hover:hover)').matches){
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;card.style.transform=`perspective(900px) rotateX(${(.5-y)*10}deg) rotateY(${(x-.5)*12}deg) translateZ(6px)`;card.style.setProperty('--x',x*100+'%');card.style.setProperty('--y',y*100+'%')});
+  card.addEventListener('mouseleave',()=>{card.style.transform='perspective(900px) rotateX(0) rotateY(0)'});
+});
+/* magnetic buttons */
+document.querySelectorAll('.magnetic').forEach(b=>{
+  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.35}px)`});
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});}
+
+/* ---------- THREE: hero "skyline" ---------- */
+(function(){
+  const host=document.getElementById('three');
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(host.clientWidth,host.clientHeight);host.appendChild(renderer.domElement);
+  const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x07090f,.045);
+  const cam=new THREE.PerspectiveCamera(50,host.clientWidth/host.clientHeight,.1,100);cam.position.set(0,6,22);
+  const group=new THREE.Group();scene.add(group);
+  const gold=new THREE.LineBasicMaterial({color:0xd4a853,transparent:true,opacity:.55});
+  const teal=new THREE.LineBasicMaterial({color:0x2fd5c1,transparent:true,opacity:.35});
+  const solid=new THREE.MeshBasicMaterial({color:0x0c1019,transparent:true,opacity:.85});
+  const towers=[];let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  for(let i=0;i<70;i++){
+    const w=.6+rnd()*1.2,h=1+rnd()*9,d=.6+rnd()*1.2;
+    const g=new THREE.BoxGeometry(w,h,d);
+    const m=new THREE.Mesh(g,solid);const isTeal=rnd()>.75,e=new THREE.LineSegments(new THREE.EdgesGeometry(g),(isTeal?teal:gold).clone());
+    const t=new THREE.Group();t.add(m);t.add(e);
+    const a=rnd()*Math.PI*2,r=4+rnd()*14;
+    t.position.set(Math.cos(a)*r,h/2-3,Math.sin(a)*r);t.userData={h,ph:rnd()*6.28,sp:.3+rnd()*.5,maxOp:isTeal?.35:.55};
+    group.add(t);towers.push(t);
+  }
+  const grid=new THREE.GridHelper(60,40,0x1c2434,0x121826);grid.position.y=-3;scene.add(grid);
+  const pg=new THREE.BufferGeometry(),pts=[];for(let i=0;i<600;i++)pts.push((rnd()-.5)*50,rnd()*18-2,(rnd()-.5)*50);
+  pg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+  const particles=new THREE.Points(pg,new THREE.PointsMaterial({color:0xf2cf7a,size:.07,transparent:true,opacity:.7}));scene.add(particles);
+  // ordem de "construção": do centro para fora
+  towers.forEach(tw=>{tw.userData.r=Math.hypot(tw.position.x,tw.position.z);tw.userData.build=0});
+  const maxR=Math.max(...towers.map(t=>t.userData.r));
+  let tx=0,ty=0;addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5)});
+  // progresso de rolagem ao longo do hero + marquee + serviços
+  const endEl=document.getElementById('servicos');
+  let target=0,sp=0;
+  const upd=()=>{const end=endEl.offsetTop+endEl.offsetHeight-innerHeight;target=Math.max(0,Math.min(1,scrollY/Math.max(1,end)))};
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  const clock=new THREE.Clock(),ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+  (function anim(){requestAnimationFrame(anim);const t=clock.getElapsedTime();
+    sp+=(target-sp)*.08; // suavização da rolagem
+    const heroP=Math.min(1,sp*2.2),cityP=ease(Math.min(1,sp/.6));
+    // câmera: começa alta e distante, desce e mergulha entre os prédios, depois orbita
+    const angle=sp*Math.PI*1.1+tx*.35, radius=22-cityP*9, height=7-cityP*4.5-ty*1.2;
+    cam.position.x+=((Math.sin(angle)*radius)-cam.position.x)*.08;
+    cam.position.z+=((Math.cos(angle)*radius)-cam.position.z)*.08;
+    cam.position.y+=((height+Math.sin(t*.5)*.25)-cam.position.y)*.08;
+    cam.lookAt(0,1.5-cityP*1.5,0);
+    // prédios "sobem" conforme a rolagem avança (do centro para a periferia)
+    towers.forEach(tw=>{
+      const u=tw.userData,start=(u.r/maxR)*.55,prog=Math.max(0,Math.min(1,(sp-start)/.35));
+      const base=.28+ease(prog)*.72, breathe=1+Math.sin(t*u.sp+u.ph)*.04;
+      const s=base*breathe;tw.scale.y=s;tw.position.y=u.h*s/2-3;
+      tw.children[1].material.opacity=u.maxOp*(.3+prog*.7);
+    });
+    group.rotation.y=t*.03;particles.rotation.y=-t*.02-sp*.6;particles.position.y=-sp*4;
+    host.style.opacity=sp<.85?1:1-(sp-.85)/.15;renderer.render(scene,cam)})();
+  addEventListener('resize',()=>{renderer.setSize(host.clientWidth,host.clientHeight);cam.aspect=host.clientWidth/host.clientHeight;cam.updateProjectionMatrix()});
+})();
+
+/* ---------- THREE: segmentos "structure" ---------- */
+(function(){
+  const host=document.getElementById('three2');
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const size=()=>renderer.setSize(host.clientWidth,host.clientHeight);size();host.prepend(renderer.domElement);
+  const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(45,host.clientWidth/host.clientHeight,.1,100);cam.position.set(0,0,9);
+  const g=new THREE.Group();scene.add(g);
+  const ico=new THREE.IcosahedronGeometry(2.4,1);
+  g.add(new THREE.Mesh(ico,new THREE.MeshBasicMaterial({color:0x0c1019,transparent:true,opacity:.6})));
+  g.add(new THREE.LineSegments(new THREE.EdgesGeometry(ico),new THREE.LineBasicMaterial({color:0xd4a853,transparent:true,opacity:.8})));
+  const inner=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(1.3,0)),new THREE.LineBasicMaterial({color:0x2fd5c1}));g.add(inner);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(3.4,.015,8,120),new THREE.MeshBasicMaterial({color:0xd4a853,transparent:true,opacity:.5}));ring.rotation.x=Math.PI/2.4;g.add(ring);
+  const ring2=ring.clone();ring2.rotation.set(Math.PI/1.7,.5,0);ring2.material=ring.material.clone();ring2.material.color.set(0x2fd5c1);ring2.material.opacity=.35;g.add(ring2);
+  let tx=0,ty=0;host.addEventListener('mousemove',e=>{const r=host.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5});host.addEventListener('mouseleave',()=>{tx=0;ty=0});
+  const clock=new THREE.Clock();
+  (function anim(){requestAnimationFrame(anim);const t=clock.getElapsedTime();
+    g.rotation.y+=((tx*1.2+t*.25)-g.rotation.y)*.05;g.rotation.x+=((ty*.8+Math.sin(t*.4)*.15)-g.rotation.x)*.05;
+    inner.rotation.y=-t*.6;inner.rotation.z=t*.3;ring.rotation.z=t*.2;ring2.rotation.z=-t*.15;renderer.render(scene,cam)})();
+  addEventListener('resize',()=>{size();cam.aspect=host.clientWidth/host.clientHeight;cam.updateProjectionMatrix()});
+})();
+
+/* ---------- diagnóstico ---------- */
+const Q=[
+  {q:'Qual é o perfil da sua empresa?',o:['Incorporadora','Construtora','Loteamento','Outro segmento']},
+  {q:'Qual é o seu maior desafio hoje?',o:['Carga tributária alta','Falta de controle financeiro','Preciso captar / vender a empresa','Organizar a contabilidade']},
+  {q:'Em que momento está o negócio?',o:['Começando o primeiro empreendimento','Vários empreendimentos em andamento','Em expansão / buscando investidor','Reestruturando']}
+];
+const R={
+ 'Carga tributária alta':{t:'Planejamento tributário e RET',x:'Há espaço para reduzir impostos com a escolha correta de regime (RET, Lucro Presumido, SPE por empreendimento). Nossa consultoria contábil analisa cada projeto e mostra o cenário mais eficiente.'},
+ 'Falta de controle financeiro':{t:'BPO Financeiro + Governança',x:'Terceirizar o financeiro com relatórios gerenciais por obra devolve previsibilidade ao caixa. Somamos a isso processos de governança para a tomada de decisão.'},
+ 'Preciso captar / vender a empresa':{t:'Due Diligence e Avaliação de Ativos',x:'Investidores exigem números auditados. Preparamos a empresa com diligência contábil, laudos de avaliação e auditoria independente.'},
+ 'Organizar a contabilidade':{t:'Contabilidade Imobiliária especializada',x:'Reconhecimento de receita por POC, patrimônio de afetação e obrigações acessórias do setor: cuidamos de tudo para você focar na obra.'}
+};
+let step=0,ans=[];const qt=document.getElementById('qtext'),op=document.getElementById('opts'),steps=document.querySelectorAll('.steps i');
+function render(){qt.textContent=Q[step].q;op.innerHTML='';Q[step].o.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=()=>{ans.push(o);step++;steps.forEach((s,i)=>s.classList.toggle('on',i<=step));if(step<Q.length)render();else finish()};b.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));b.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));op.appendChild(b)})}
+function finish(){const r=R[ans[1]];document.getElementById('quiz').style.display='none';document.getElementById('rtitle').textContent=r.t;document.getElementById('rtext').textContent=r.x;
+  document.getElementById('rwa').href='https://wa.me/5527992424004?text='+encodeURIComponent(`Olá! Fiz o diagnóstico no site. Perfil: ${ans[0]}. Desafio: ${ans[1]}. Momento: ${ans[2]}. Gostaria de conversar sobre ${r.t}.`);
+  document.getElementById('result').classList.add('show')}
+document.getElementById('restart').onclick=()=>{step=0;ans=[];steps.forEach((s,i)=>s.classList.toggle('on',i===0));document.getElementById('result').classList.remove('show');document.getElementById('quiz').style.display='';render()};
+render();
+
+/* ---------- form -> whatsapp ---------- */
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
+  const msg=`Olá! Meu nome é ${f.get('nome')}${f.get('empresa')?' da '+f.get('empresa'):''}. Segmento: ${f.get('seg')}. E-mail: ${f.get('email')}. ${f.get('fone')?'WhatsApp: '+f.get('fone')+'. ':''}${f.get('msg')||''}`;
+  const url='https://wa.me/5527992424004?text='+encodeURIComponent(msg);
+  const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+  document.getElementById('sent').style.display='block';document.querySelector('.wa').href=url;});
+</script>
+</body>
+</html>
